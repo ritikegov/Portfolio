@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ritik Kumar Verma — Software Engineer</title>
+<meta name="description" content="Software Engineer at eGov Foundation, Bengaluru. Java, Spring Boot, Kafka, Flutter. Backend microservices and mobile applications.">
+<meta name="author" content="Ritik Kumar Verma">
+<meta property="og:title" content="Ritik Kumar Verma — Software Engineer">
+<meta property="og:description" content="Backend microservices in Java and Spring Boot. Mobile applications in Flutter. Bengaluru, India.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%2310141c'/><text y='68' x='50' text-anchor='middle' font-family='monospace' font-size='52' font-weight='700' fill='%23f0a835'>rv</text></svg>">
+<style>
+:root{
+  --ground:#10141c;
+  --panel:#161b26;
+  --panel-2:#1b2130;
+  --rule:#252d3d;
+  --ink:#d7dde8;
+  --dim:#7b8798;
+  --dimmer:#4d5666;
+  --amber:#f0a835;
+  --cyan:#5fb8d6;
+  --green:#7bc47f;
+  --gh:#3fb950;
+  --gh-bright:#39d353;
+  --gh-soft:rgba(63,185,80,.32);
+  --maxw:1100px;
+  --gutter:96px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 500px at 12% -8%, rgba(240,168,53,.07), transparent 60%),
+    radial-gradient(700px 400px at 95% 8%, rgba(95,184,214,.05), transparent 60%);
+}
+a{color:var(--cyan);text-decoration:none}
+a:hover{color:var(--amber)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(16,20,28,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.bar-in{
+  max-width:var(--maxw);margin:0 auto;padding:0 20px;height:52px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.prompt{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--dim);white-space:nowrap}
+.prompt b{color:var(--green);font-weight:500}
+.prompt i{color:var(--amber);font-style:normal}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--dim);
+  padding:5px 9px;border-radius:4px;border:1px solid transparent;
+}
+.nav a:hover{color:var(--amber);border-color:var(--rule);background:var(--panel)}
+.nav a::before{content:"·";margin-right:5px;color:var(--dimmer)}
+
+/* ---------- shell ---------- */
+.shell{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+section{padding:56px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+
+/* log-line section header */
+.log{display:flex;gap:14px;align-items:baseline;margin-bottom:26px;flex-wrap:wrap}
+.log .ts{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dimmer);white-space:nowrap}
+.log .lvl{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.06em;
+  color:var(--amber);border:1px solid rgba(240,168,53,.32);border-radius:3px;padding:2px 6px;
+  background:rgba(240,168,53,.07);white-space:nowrap;
+}
+.log h2{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(20px,3vw,26px);
+  letter-spacing:-.02em;margin:0;color:#fff;
+}
+.log .topic{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim)}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 60px;border-bottom:1px solid var(--rule)}
+.boot{
+  font-family:"IBM Plex Mono",monospace;font-size:13.5px;line-height:1.95;
+  background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+  padding:18px 20px;max-width:660px;overflow-x:auto;
+}
+.boot .row{white-space:pre;color:var(--dim)}
+.boot .row.hide{visibility:hidden}
+.boot .k{color:var(--amber)}
+.boot .v{color:var(--ink)}
+.boot .ok{color:var(--green)}
+.caret{display:inline-block;width:8px;height:15px;background:var(--amber);vertical-align:-2px;animation:blink 1.05s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.name{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;
+  font-size:clamp(38px,8.5vw,80px);line-height:1.02;letter-spacing:-.035em;
+  margin:34px 0 0;color:#fff;
+}
+.name .dot{color:var(--amber)}
+.role{
+  font-family:"IBM Plex Mono",monospace;font-size:clamp(13px,2vw,15px);color:var(--dim);
+  margin:14px 0 0;
+}
+.role strong{color:var(--ink);font-weight:500}
+.blurb{max-width:60ch;color:var(--dim);margin:22px 0 0;font-size:16.5px}
+.blurb strong{color:var(--ink);font-weight:500}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  padding:9px 15px;border-radius:5px;border:1px solid var(--rule);
+  background:var(--panel);color:var(--ink);display:inline-flex;align-items:center;gap:8px;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.btn:hover{border-color:var(--amber);color:var(--amber);background:var(--panel-2)}
+.btn.primary{border-color:rgba(240,168,53,.45);color:var(--amber);background:rgba(240,168,53,.08)}
+.btn.primary:hover{background:rgba(240,168,53,.15)}
+.uptime{
+  display:inline-flex;align-items:center;gap:8px;margin-top:22px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);
+}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(123,196,127,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,196,127,.5)}70%{box-shadow:0 0 0 8px rgba(123,196,127,0)}100%{box-shadow:0 0 0 0 rgba(123,196,127,0)}}
+
+/* ---------- timeline / experience ---------- */
+.entry{
+  display:grid;grid-template-columns:var(--gutter) 1fr;gap:24px;
+  padding:22px 0;border-top:1px dashed var(--rule);
+}
+.entry:first-of-type{border-top:0;padding-top:0}
+.when{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dimmer);line-height:1.7;padding-top:5px}
+.when b{display:block;color:var(--amber);font-weight:500}
+.entry h3{font-family:"Space Grotesk",sans-serif;font-size:19px;font-weight:700;margin:0;color:#fff;letter-spacing:-.01em}
+.org{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--dim);margin:5px 0 12px}
+ul.pts{margin:0;padding:0;list-style:none}
+ul.pts li{position:relative;padding-left:20px;margin-bottom:8px;color:var(--dim);font-size:15.2px}
+ul.pts li::before{
+  content:"›";position:absolute;left:2px;top:-1px;color:var(--amber);
+  font-family:"IBM Plex Mono",monospace;font-size:14px;
+}
+ul.pts li strong{color:var(--ink);font-weight:500}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{
+  background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:20px;
+  transition:border-color .16s,transform .16s;
+}
+.card:hover{border-color:rgba(240,168,53,.34);transform:translateY(-2px)}
+.card h3{font-family:"Space Grotesk",sans-serif;font-size:17.5px;font-weight:700;margin:0 0 4px;color:#fff}
+.card h3 a{color:#fff}
+.card h3 a:hover{color:var(--amber)}
+.stack{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--amber);margin:0 0 11px}
+.card p{margin:0 0 13px;color:var(--dim);font-size:14.8px}
+.card .links{display:flex;gap:14px;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+
+/* ---------- skills ---------- */
+.skill-row{display:grid;grid-template-columns:var(--gutter) 1fr;gap:24px;padding:12px 0;border-top:1px dashed var(--rule)}
+.skill-row:first-child{border-top:0}
+.skill-key{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dimmer);padding-top:6px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  padding:4px 10px;border-radius:4px;border:1px solid var(--rule);
+  background:var(--panel);color:var(--ink);
+}
+.chip:hover{border-color:rgba(95,184,214,.4);color:var(--cyan)}
+
+/* ---------- github (green-scoped) ---------- */
+#github .lvl{color:var(--gh);border-color:var(--gh-soft);background:rgba(63,185,80,.08)}
+#github .stat .n{color:var(--gh)}
+#github .card:hover{border-color:var(--gh-soft)}
+#github .repo a.nm:hover{color:var(--gh)}
+#github .ev .m a{color:var(--gh)}
+#github .err a{color:var(--gh)}
+#github .btn:hover{border-color:var(--gh);color:var(--gh)}
+
+.gh-row{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;margin-bottom:20px;align-items:stretch}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px}
+.panel .cap{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dim);margin-bottom:12px}
+.panel .cap b{color:var(--gh);font-weight:500}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.stat .n{font-family:"Space Grotesk",sans-serif;font-size:26px;font-weight:700;color:var(--amber);line-height:1.1}
+.stat .l{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.03em}
+.chart-wrap{min-width:0}
+.chart-scroll{overflow-x:auto}
+.chart-scroll img{width:100%;min-width:600px;display:block}
+
+.radar{display:block;width:100%;height:auto;max-width:288px;margin:0 auto}
+.radar .axis{stroke:var(--gh);stroke-width:1.5;opacity:.75}
+.radar .shape{fill:var(--gh);fill-opacity:.42;stroke:var(--gh-bright);stroke-width:1.5;stroke-linejoin:round}
+.radar .node{fill:#0f1a12;stroke:var(--gh-bright);stroke-width:2}
+.radar .pct{fill:var(--gh-bright);font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;text-anchor:middle}
+.radar .lbl{fill:var(--dim);font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;text-anchor:middle}
+.radar .n{fill:var(--dimmer);font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-anchor:middle}
+.radar-note{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--dimmer);text-align:center;margin-top:10px;line-height:1.5}
+.repo{display:flex;flex-direction:column;gap:9px}
+.repo .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.repo .nm{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--ink)}
+.repo a.nm:hover{color:var(--amber)}
+.repo .desc{color:var(--dim);font-size:14px;margin:0;flex:1}
+.repo .meta{display:flex;gap:14px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dimmer);flex-wrap:wrap;align-items:center}
+.lang{display:inline-flex;align-items:center;gap:6px}
+.lang i{width:9px;height:9px;border-radius:50%;background:var(--dimmer);display:inline-block}
+.feed{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:6px 0;margin-top:20px}
+.ev{
+  display:grid;grid-template-columns:78px 1fr;gap:14px;padding:9px 18px;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;border-top:1px solid var(--rule);
+}
+.ev:first-child{border-top:0}
+.ev .t{color:var(--dimmer);white-space:nowrap}
+.ev .m{color:var(--dim);min-width:0}
+.ev .m a{color:var(--amber)}
+.ev .m span{display:block;color:var(--dimmer);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.loading,.err{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--dim);padding:14px 0}
+.err a{color:var(--amber)}
+
+/* ---------- certs ---------- */
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}
+.cert{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--dim);
+  padding:9px 13px;border-left:2px solid var(--rule);background:var(--panel);border-radius:0 5px 5px 0;
+}
+.cert:hover{border-left-color:var(--amber);color:var(--ink)}
+.cert em{font-style:normal;color:var(--dimmer);font-size:11.5px;display:block;margin-top:1px}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:26px}
+.cx{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px;display:block}
+.cx:hover{border-color:rgba(240,168,53,.34)}
+.cx .l{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dimmer);letter-spacing:.05em}
+.cx .v{font-family:"IBM Plex Mono",monospace;font-size:13.5px;color:var(--ink);margin-top:4px;word-break:break-all}
+.cx:hover .v{color:var(--amber)}
+footer{padding:26px 0 40px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--dimmer);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .gh-row{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  :root{--gutter:0px}
+  .entry,.skill-row{grid-template-columns:1fr;gap:10px}
+  .when,.skill-key{padding-top:0}
+  .when b{display:inline;margin-right:8px}
+  .nav a:nth-child(n+5){display:none}
+  section{padding:42px 0}
+  .boot{font-size:11.5px;padding:14px}
+  .ev{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+  .boot .row.hide{visibility:visible}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="prompt"><b>ritik</b>@<i>bengaluru</i>:~$ <span class="caret" aria-hidden="true"></span></div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">about</a>
+      <a href="#work">work</a>
+      <a href="#projects">projects</a>
+      <a href="#github">github</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="boot" id="boot" role="status" aria-label="Service start-up log">
+      <div class="row">$ ./ritik --serve</div>
+      <div class="row"><span class="k">[INIT ]</span> loading profile ............... <span class="ok">ok</span></div>
+      <div class="row"><span class="k">[INFO ]</span> role ......................... <span class="v">Software Engineer</span></div>
+      <div class="row"><span class="k">[INFO ]</span> org .......................... <span class="v">eGov Foundation</span></div>
+      <div class="row"><span class="k">[INFO ]</span> stack ........................ <span class="v">Java · Spring Boot · Kafka · Flutter</span></div>
+      <div class="row"><span class="k">[INFO ]</span> location ..................... <span class="v">Bengaluru, India</span></div>
+      <div class="row"><span class="ok">[READY]</span> accepting connections</div>
+    </div>
+
+    <h1 class="name">Ritik Kumar<br>Verma<span class="dot">.</span></h1>
+    <p class="role">Software Engineer <strong>@ eGov Foundation</strong> — backend microservices &amp; mobile</p>
+    <p class="blurb">I build <strong>event-driven backend services in Java and Spring Boot</strong>, and I shipped a Flutter health-campaign app that runs across Congo, Burundi and Nigeria. Most of my day goes into Kafka pipelines, API performance, and making systems hold up under real load.</p>
+
+    <div class="uptime"><span class="pulse" aria-hidden="true"></span><span id="uptime">calculating uptime…</span></div>
+
+    <div class="cta">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn" href="Ritik_Kumar_Verma.pdf" download>Download résumé</a>
+      <a class="btn" href="https://github.com/ritikegov" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/hirithik05/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="rv">
+    <div class="log">
+      <span class="ts">2026-08-27T09:00:00Z</span>
+      <span class="lvl">INFO</span>
+      <h2>About</h2>
+      <span class="topic mono">topic: profile.summary</span>
+    </div>
+    <p class="blurb" style="max-width:66ch;font-size:16.5px">
+      I graduated in 2024 with a B.Tech in Computer Science (Artificial Intelligence) and joined
+      <strong>eGov Foundation</strong> — first as an intern on the mobile side, now full-time on backend.
+      That path means I've seen both ends of a request: I wrote the Flutter screens that call the API,
+      and now I write the Spring Boot services that answer them.
+    </p>
+    <p class="blurb" style="max-width:66ch;font-size:16.5px">
+      The work is public-good software at national scale, so correctness and uptime matter more than novelty.
+      I care about <strong>clean service boundaries, sensible caching, and messaging that doesn't lose events</strong>.
+    </p>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="rv">
+    <div class="log">
+      <span class="ts">2025-09-01T00:00:00Z</span>
+      <span class="lvl">INFO</span>
+      <h2>Experience</h2>
+      <span class="topic mono">topic: career.events</span>
+    </div>
+
+    <div class="entry">
+      <div class="when"><b>Sep 2025</b>→ present</div>
+      <div>
+        <h3>Software Engineer</h3>
+        <p class="org">eGov Foundation · Bengaluru, India</p>
+        <ul class="pts">
+          <li>Build and maintain <strong>backend microservices in Java and Spring Boot</strong>, with a focus on secure, scalable service architecture.</li>
+          <li>Implemented <strong>Kafka-based event-driven communication</strong> for inter-service messaging and asynchronous processing.</li>
+          <li>Improved API performance by tightening business logic, adding caching, and tracing production bottlenecks.</li>
+          <li>Work across engineering teams using Git and Agile (Scrum).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when"><b>Mar 2025</b>→ Aug 2025</div>
+      <div>
+        <h3>Software Engineering Intern</h3>
+        <p class="org">eGov Foundation · Bengaluru, India</p>
+        <ul class="pts">
+          <li>Developed and maintained the <strong>Health Campaign Management (HCM)</strong> mobile app in Flutter and Dart, deployed at scale across <strong>Congo, Burundi and Nigeria</strong>.</li>
+          <li>Implemented <strong>BLoC state management</strong> for maintainable UI workflows.</li>
+          <li>Integrated REST APIs alongside the backend and product teams.</li>
+          <li>Handled Android builds, testing and releases through Git-based workflows.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="rv">
+    <div class="log">
+      <span class="ts">2025-07-31T00:00:00Z</span>
+      <span class="lvl">INFO</span>
+      <h2>Projects</h2>
+      <span class="topic mono">topic: repo.highlights</span>
+    </div>
+    <div class="grid g2">
+      <article class="card">
+        <h3><a href="https://github.com/ritikegov/birth-reg-backend" target="_blank" rel="noopener">Birth Registration Service</a></h3>
+        <p class="stack">Java · Spring Boot · PostgreSQL · Apache Kafka</p>
+        <p>A scalable birth-registration backend. PostgreSQL holds the records; Kafka carries registration events to downstream consumers in real time, so the write path stays fast and the rest of the system catches up asynchronously.</p>
+        <div class="links"><a href="https://github.com/ritikegov/birth-reg-backend" target="_blank" rel="noopener">source →</a><span style="color:var(--dimmer)">Mar – Apr 2025</span></div>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/ritikegov/Restaurant-App" target="_blank" rel="noopener">Restaurant Table Booking</a></h3>
+        <p class="stack">Flutter · Dart · SQLite</p>
+        <p>A restaurant booking app built on a modular Flutter architecture with reusable widgets and a responsive layout. Handles menu browsing, table selection and local persistence through SQLite.</p>
+        <div class="links"><a href="https://github.com/ritikegov/Restaurant-App" target="_blank" rel="noopener">source →</a><span style="color:var(--dimmer)">Jun – Jul 2025</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- GITHUB -->
+  <section id="github" class="rv">
+    <div class="log">
+      <span class="ts">live</span>
+      <span class="lvl">STREAM</span>
+      <h2>GitHub activity</h2>
+      <span class="topic mono">source: api.github.com/ritikegov</span>
+    </div>
+
+    <div class="stats" id="gh-stats">
+      <div class="stat"><div class="n">—</div><div class="l">loading…</div></div>
+    </div>
+
+    <div class="gh-row">
+      <div class="panel chart-wrap">
+        <div class="cap"><b>contributions</b> · last 12 months</div>
+        <div class="chart-scroll">
+          <img id="gh-chart" src="https://ghchart.rshah.org/39d353/ritikegov" alt="GitHub contribution graph for ritikegov" loading="lazy">
+        </div>
+        <div class="err" id="chart-fallback" hidden>Contribution graph unavailable — <a href="https://github.com/ritikegov" target="_blank" rel="noopener">view it on GitHub</a>.</div>
+      </div>
+
+      <div class="panel" id="gh-radar-panel">
+        <div class="cap"><b>activity split</b> · last 90 days</div>
+        <div id="gh-radar"><div class="loading" style="text-align:center">measuring activity…</div></div>
+      </div>
+    </div>
+
+    <div class="grid g2" id="gh-repos"><div class="loading">fetching repositories…</div></div>
+
+    <div class="feed" id="gh-feed"><div class="loading" style="padding:14px 18px">fetching recent commits…</div></div>
+
+    <p style="margin-top:18px"><a class="btn" href="https://github.com/ritikegov" target="_blank" rel="noopener">See the full profile →</a></p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="rv">
+    <div class="log">
+      <span class="ts">2026-08-27T09:00:00Z</span>
+      <span class="lvl">CONFIG</span>
+      <h2>Skills</h2>
+      <span class="topic mono">topic: stack.manifest</span>
+    </div>
+
+    <div class="skill-row"><div class="skill-key">languages</div><div class="chips"><span class="chip">Java</span><span class="chip">Dart</span><span class="chip">Python</span><span class="chip">SQL</span></div></div>
+    <div class="skill-row"><div class="skill-key">backend</div><div class="chips"><span class="chip">Spring Boot</span><span class="chip">RESTful APIs</span><span class="chip">Apache Kafka</span><span class="chip">Microservices</span></div></div>
+    <div class="skill-row"><div class="skill-key">frontend</div><div class="chips"><span class="chip">Flutter</span><span class="chip">BLoC</span><span class="chip">HTML5</span><span class="chip">CSS3</span></div></div>
+    <div class="skill-row"><div class="skill-key">databases</div><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">SQLite</span></div></div>
+    <div class="skill-row"><div class="skill-key">tooling</div><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Jira</span><span class="chip">Postman</span><span class="chip">VS Code</span><span class="chip">Eclipse</span><span class="chip">PyCharm</span></div></div>
+    <div class="skill-row"><div class="skill-key">foundations</div><div class="chips"><span class="chip">Data Structures &amp; Algorithms</span><span class="chip">OOP</span><span class="chip">Agile / Scrum</span></div></div>
+  </section>
+
+  <!-- EDUCATION + CERTS -->
+  <section id="education" class="rv">
+    <div class="log">
+      <span class="ts">2020-08-01T00:00:00Z</span>
+      <span class="lvl">INFO</span>
+      <h2>Education &amp; certifications</h2>
+      <span class="topic mono">topic: credentials</span>
+    </div>
+
+    <div class="entry" style="margin-bottom:26px">
+      <div class="when"><b>2020</b>→ 2024</div>
+      <div>
+        <h3>B.Tech, Computer Science &amp; Engineering (AI)</h3>
+        <p class="org">Noida Institute of Engineering and Technology · Greater Noida, U.P.</p>
+        <ul class="pts"><li>CGPA <strong>8.33 / 10.0</strong></li></ul>
+      </div>
+    </div>
+
+    <div class="certs">
+      <div class="cert">Object-Oriented Programming in Java<em>Coursera</em></div>
+      <div class="cert">Cryptography<em>Coursera</em></div>
+      <div class="cert">Blockchain Basics<em>Coursera</em></div>
+      <div class="cert">Introduction to Web Development<em>Coursera</em></div>
+      <div class="cert">Programming Fundamentals with Python<em>Infosys Springboard</em></div>
+      <div class="cert">Emotional Intelligence<em>NPTEL</em></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="rv">
+    <div class="log">
+      <span class="ts">open</span>
+      <span class="lvl">LISTEN</span>
+      <h2>Get in touch</h2>
+      <span class="topic mono">status: open to conversations</span>
+    </div>
+    <div class="contact-grid">
+      <a class="cx" href="mailto:ritik.verma.software@gmail.com"><div class="l">EMAIL</div><div class="v">ritik.verma.software@gmail.com</div></a>
+      <a class="cx" href="https://www.linkedin.com/in/hirithik05/" target="_blank" rel="noopener"><div class="l">LINKEDIN</div><div class="v">/in/hirithik05</div></a>
+      <a class="cx" href="https://github.com/ritikegov" target="_blank" rel="noopener"><div class="l">GITHUB</div><div class="v">/ritikegov</div></a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr">2026</span> Ritik Kumar Verma · Bengaluru, India</span>
+    <span>built with HTML, CSS &amp; a little JavaScript</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var USER = "ritikegov";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---- uptime since joining full-time ---- */
+  (function(){
+    var start = new Date("2025-09-01T00:00:00Z");
+    var days = Math.max(0, Math.floor((Date.now() - start) / 86400000));
+    var el = document.getElementById("uptime");
+    if (el) el.textContent = "uptime " + days + " days · shipping at eGov Foundation since Sep 2025";
+  })();
+
+  /* ---- boot sequence ---- */
+  (function(){
+    var rows = Array.prototype.slice.call(document.querySelectorAll("#boot .row"));
+    if (reduce) return;
+    rows.forEach(function(r){ r.classList.add("hide"); });
+    rows.forEach(function(r, i){
+      setTimeout(function(){ r.classList.remove("hide"); }, 130 * i + 120);
+    });
+  })();
+
+  /* ---- scroll reveal ---- */
+  (function(){
+    var items = document.querySelectorAll(".rv");
+    if (reduce || !("IntersectionObserver" in window)) {
+      items.forEach(function(n){ n.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -60px 0px", threshold: 0.05 });
+    items.forEach(function(n){ io.observe(n); });
+  })();
+
+  /* ---- contribution chart fallback ---- */
+  (function(){
+    var img = document.getElementById("gh-chart");
+    img.addEventListener("error", function(){
+      img.hidden = true;
+      document.getElementById("chart-fallback").hidden = false;
+    });
+  })();
+
+  /* ---- helpers ---- */
+  var LANG_COLORS = {
+    Java:"#b07219", Dart:"#00B4AB", Python:"#3572A5", JavaScript:"#f1e05a",
+    TypeScript:"#3178c6", HTML:"#e34c26", CSS:"#563d7c", Kotlin:"#A97BFF",
+    Shell:"#89e051", "C++":"#f34b7d", C:"#555555", Swift:"#F05138", Go:"#00ADD8"
+  };
+
+  function ago(iso){
+    var s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 60) return "just now";
+    if (s < 3600) return Math.floor(s/60) + "m ago";
+    if (s < 86400) return Math.floor(s/3600) + "h ago";
+    var d = Math.floor(s/86400);
+    if (d < 30) return d + "d ago";
+    if (d < 365) return Math.floor(d/30) + "mo ago";
+    return Math.floor(d/365) + "y ago";
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+
+  function gh(path){
+    return fetch("https://api.github.com/" + path, {
+      headers: { Accept: "application/vnd.github+json" }
+    }).then(function(r){
+      if (!r.ok) throw new Error("GitHub responded " + r.status);
+      return r.json();
+    });
+  }
+
+  function failure(node, msg){
+    node.innerHTML = '<div class="err">' + esc(msg) +
+      ' — <a href="https://github.com/' + USER + '" target="_blank" rel="noopener">open GitHub instead</a></div>';
+  }
+
+  /* ---- profile stats ---- */
+  gh("users/" + USER).then(function(u){
+    var joined = new Date(u.created_at).getFullYear();
+    var stats = [
+      [u.public_repos, "public repos"],
+      [u.followers, "followers"],
+      [u.following, "following"],
+      [joined, "on github since"]
+    ];
+    document.getElementById("gh-stats").innerHTML = stats.map(function(s){
+      return '<div class="stat"><div class="n">' + esc(s[0]) + '</div><div class="l">' + s[1] + "</div></div>";
+    }).join("");
+  }).catch(function(){
+    failure(document.getElementById("gh-stats"), "Profile stats unavailable");
+  });
+
+  /* ---- most recently pushed repositories ---- */
+  gh("users/" + USER + "/repos?sort=pushed&per_page=100").then(function(repos){
+    var list = repos.filter(function(r){ return !r.fork; }).slice(0, 6);
+    if (!list.length) { failure(document.getElementById("gh-repos"), "No public repositories found"); return; }
+    document.getElementById("gh-repos").innerHTML = list.map(function(r){
+      var color = LANG_COLORS[r.language] || "#4d5666";
+      return '<article class="card repo">' +
+        '<div class="top">' +
+          '<a class="nm" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">' + esc(r.name) + "</a>" +
+          '<span class="meta">' + (r.stargazers_count ? "★ " + r.stargazers_count : "") + "</span>" +
+        "</div>" +
+        '<p class="desc">' + esc(r.description || "No description yet.") + "</p>" +
+        '<div class="meta">' +
+          (r.language ? '<span class="lang"><i style="background:' + color + '"></i>' + esc(r.language) + "</span>" : "") +
+          "<span>updated " + ago(r.pushed_at) + "</span>" +
+        "</div>" +
+      "</article>";
+    }).join("");
+  }).catch(function(){
+    failure(document.getElementById("gh-repos"), "Repositories unavailable (GitHub rate limit)");
+  });
+
+  /* ---- activity split radar (computed from public events) ---- */
+  function drawRadar(events){
+    var host = document.getElementById("gh-radar");
+
+    var commits = 0, prs = 0, issues = 0, reviews = 0;
+    events.forEach(function(e){
+      if (e.type === "PushEvent") {
+        commits += (e.payload && (e.payload.size || (e.payload.commits || []).length)) || 0;
+      } else if (e.type === "PullRequestEvent") {
+        prs++;
+      } else if (e.type === "IssuesEvent") {
+        issues++;
+      } else if (e.type === "PullRequestReviewEvent" || e.type === "PullRequestReviewCommentEvent") {
+        reviews++;
+      }
+    });
+
+    var total = commits + prs + issues + reviews;
+    if (!total) {
+      host.innerHTML = '<div class="err" style="text-align:center">No public activity in the last 90 days.</div>';
+      return;
+    }
+
+    // clockwise from top, matching GitHub's own layout
+    var axes = [
+      { key: "Code review",   v: reviews, angle: -Math.PI / 2 },
+      { key: "Issues",        v: issues,  angle: 0 },
+      { key: "Pull requests", v: prs,     angle: Math.PI / 2 },
+      { key: "Commits",       v: commits, angle: Math.PI }
+    ];
+
+    var CX = 160, CY = 140, R = 72;
+    var max = Math.max.apply(null, axes.map(function(a){ return a.v; })) || 1;
+
+    var pts = axes.map(function(a){
+      var r = a.v ? Math.max(8, R * (a.v / max)) : 3;
+      return {
+        x: +(CX + r * Math.cos(a.angle)).toFixed(1),
+        y: +(CY + r * Math.sin(a.angle)).toFixed(1),
+        pct: Math.round((a.v / total) * 100),
+        key: a.key
+      };
+    });
+
+    var svg = '<svg class="radar" viewBox="0 0 320 272" role="img" ' +
+      'aria-label="Activity split: ' + pts.map(function(p){ return p.key + " " + p.pct + "%"; }).join(", ") + '">';
+
+    // axis spokes
+    axes.forEach(function(a){
+      svg += '<line class="axis" x1="' + CX + '" y1="' + CY +
+        '" x2="' + (CX + R * Math.cos(a.angle)).toFixed(1) +
+        '" y2="' + (CY + R * Math.sin(a.angle)).toFixed(1) + '"/>';
+    });
+
+    svg += '<polygon class="shape" points="' +
+      pts.map(function(p){ return p.x + "," + p.y; }).join(" ") + '"/>';
+
+    pts.forEach(function(p){
+      svg += '<circle class="node" cx="' + p.x + '" cy="' + p.y + '" r="4"/>';
+    });
+
+    // labels: top, right, bottom, left
+    svg += '<text class="pct" x="160" y="46">' + pts[0].pct + '%</text>' +
+           '<text class="lbl" x="160" y="28">Code review</text>' +
+           '<text class="pct" x="244" y="134" text-anchor="start">' + pts[1].pct + '%</text>' +
+           '<text class="lbl" x="244" y="152" text-anchor="start">Issues</text>' +
+           '<text class="pct" x="160" y="238">' + pts[2].pct + '%</text>' +
+           '<text class="lbl" x="160" y="256">Pull requests</text>' +
+           '<text class="pct" x="76" y="134" text-anchor="end">' + pts[3].pct + '%</text>' +
+           '<text class="lbl" x="76" y="152" text-anchor="end">Commits</text>';
+
+    svg += "</svg>";
+
+    function unit(n, one, many){ return n + " " + (n === 1 ? one : many); }
+    svg += '<div class="radar-note">' +
+      unit(commits, "commit", "commits") + " · " +
+      unit(prs, "PR", "PRs") + " · " +
+      unit(issues, "issue", "issues") + " · " +
+      unit(reviews, "review", "reviews") +
+      "<br>from public events only</div>";
+
+    host.innerHTML = svg;
+  }
+
+  /* ---- recent push activity + radar (one fetch) ---- */
+  gh("users/" + USER + "/events/public?per_page=100").then(function(events){
+    drawRadar(events);
+
+    var pushes = events.filter(function(e){
+      return e.type === "PushEvent" && e.payload && e.payload.commits && e.payload.commits.length;
+    }).slice(0, 8);
+
+    if (!pushes.length) {
+      document.getElementById("gh-feed").innerHTML =
+        '<div class="err" style="padding:14px 18px">No public commits in the last 90 days — a lot of the work lives in private and org repos.</div>';
+      return;
+    }
+
+    document.getElementById("gh-feed").innerHTML = pushes.map(function(e){
+      var repo = e.repo.name;
+      var last = e.payload.commits[e.payload.commits.length - 1];
+      var n = e.payload.commits.length;
+      return '<div class="ev">' +
+        '<div class="t">' + ago(e.created_at) + "</div>" +
+        '<div class="m">pushed ' + n + " commit" + (n > 1 ? "s" : "") + " to " +
+          '<a href="https://github.com/' + esc(repo) + '" target="_blank" rel="noopener">' + esc(repo) + "</a>" +
+          "<span>" + esc(last.message.split("\n")[0]) + "</span>" +
+        "</div>" +
+      "</div>";
+    }).join("");
+  }).catch(function(){
+    failure(document.getElementById("gh-feed"), "Activity feed unavailable (GitHub rate limit)");
+    failure(document.getElementById("gh-radar"), "Activity split unavailable");
+  });
+})();
+</script>
+</body>
+</html>
